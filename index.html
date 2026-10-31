@@ -708,6 +708,7 @@
           }
 
           function kick() {
+            root.querySelectorAll("video").forEach(function (v) { if (!v.paused) v.pause(); });
             if (reduceMotion) { current = target; render(); return; }
             if (!raf) raf = requestAnimationFrame(tick);
           }
