@@ -298,6 +298,12 @@
         object-fit: cover;
         background: #000;
       }
+      .motion-video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+      }
       .play-badge {
         position: absolute;
         inset: 0;
@@ -478,12 +484,17 @@
         <div class="carousel" data-carousel tabindex="0" role="group" aria-roledescription="carousel" aria-label="Motion samples">
           <div class="stage">
             <div class="track">
+          <article class="card">
+            <span class="tape" aria-hidden="true"></span>
+            <video class="motion-video" src="motion-1.mp4" poster="motion-1.jpg" controls playsinline preload="metadata" aria-label="Motion sample 1"></video>
+            <p class="caption">Motion sample 1</p>
+          </article>
                     <article class="card">
             <span class="tape" aria-hidden="true"></span>
             <div class="thumb wide">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.2v7.6L16.4 12 10 8.2Z"/></svg>
               <span class="soon">Sample coming soon</span>
-              <span class="slot">Slot 01</span>
+              <span class="slot">Slot 02</span>
             </div>
             <p class="caption">First motion sample lands here</p>
           </article>
@@ -492,7 +503,7 @@
             <div class="thumb wide">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.2v7.6L16.4 12 10 8.2Z"/></svg>
               <span class="soon">Sample coming soon</span>
-              <span class="slot">Slot 02</span>
+              <span class="slot">Slot 03</span>
             </div>
             <p class="caption">Space saved for the next one</p>
           </article>
@@ -501,7 +512,7 @@
             <div class="thumb wide">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.2v7.6L16.4 12 10 8.2Z"/></svg>
               <span class="soon">Sample coming soon</span>
-              <span class="slot">Slot 03</span>
+              <span class="slot">Slot 04</span>
             </div>
             <p class="caption">More motion cuts on the way</p>
           </article>
@@ -510,7 +521,7 @@
             <div class="thumb wide">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.2v7.6L16.4 12 10 8.2Z"/></svg>
               <span class="soon">Sample coming soon</span>
-              <span class="slot">Slot 04</span>
+              <span class="slot">Slot 05</span>
             </div>
             <p class="caption">Another motion piece coming soon</p>
           </article>
@@ -675,6 +686,12 @@
               link.addEventListener("click", function (e) {
                 var off = wrapOff(i - Math.round(target), n);
                 if (off !== 0) e.preventDefault();
+              });
+            }
+            var vid = el.querySelector("video");
+            if (vid) {
+              vid.addEventListener("click", function (e) {
+                if (el.getAttribute("aria-hidden") === "true") e.preventDefault();
               });
             }
           });
