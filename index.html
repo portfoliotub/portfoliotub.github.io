@@ -304,6 +304,44 @@
         aspect-ratio: 16 / 9;
         background: #000;
       }
+      .motion-player { border-radius: 2px; overflow: hidden; background: #000; }
+      .motion-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #14100a;
+        padding: 8px 10px;
+      }
+      .motion-play {
+        flex: 0 0 auto;
+        width: 30px; height: 30px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        background: transparent;
+        color: #f3e9d2;
+        font-size: 12px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .motion-progress {
+        flex: 1 1 auto;
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.22);
+        cursor: pointer;
+      }
+      .motion-progress-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 4px;
+        background: var(--red);
+      }
+      .motion-time {
+        flex: 0 0 auto;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        color: #f3e9d2;
+      }
       .play-badge {
         position: absolute;
         inset: 0;
@@ -486,7 +524,14 @@
             <div class="track">
           <article class="card">
             <span class="tape" aria-hidden="true"></span>
-            <video class="motion-video" src="motion-1.mp4" poster="motion-1.jpg" controls playsinline preload="metadata" aria-label="Motion sample 1"></video>
+            <div class="motion-player">
+              <video class="motion-video" src="motion-1.mp4" poster="motion-1.jpg" playsinline preload="metadata" disablepictureinpicture oncontextmenu="return false" aria-label="Motion sample 1"></video>
+              <div class="motion-controls">
+                <button type="button" class="motion-play" aria-label="Play">▶</button>
+                <div class="motion-progress"><div class="motion-progress-fill"></div></div>
+                <span class="motion-time">0:00 / 0:00</span>
+              </div>
+            </div>
             <p class="caption">Motion sample 1</p>
           </article>
                     <article class="card">
@@ -690,8 +735,9 @@
             }
             var vid = el.querySelector("video");
             if (vid) {
-              vid.addEventListener("click", function (e) {
-                if (el.getAttribute("aria-hidden") === "true") e.preventDefault();
+              vid.addEventListener("click", function () {
+                if (el.getAttribute("aria-hidden") === "true") return;
+                if (vid.paused) vid.play(); else vid.pause();
               });
             }
           });
@@ -716,6 +762,47 @@
 
           measure();
           render();
+        });
+
+        // Minimal custom player controls: play/pause + seek only.
+        // No volume, no fullscreen, no download button.
+        document.querySelectorAll(".motion-player").forEach(function (player) {
+          var vid = player.querySelector("video");
+          var btn = player.querySelector(".motion-play");
+          var bar = player.querySelector(".motion-progress");
+          var fill = player.querySelector(".motion-progress-fill");
+          var time = player.querySelector(".motion-time");
+          if (!vid || !btn || !bar || !fill || !time) return;
+          function fmt(s) {
+            if (!isFinite(s)) return "0:00";
+            var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+            return m + ":" + (sec < 10 ? "0" : "") + sec;
+          }
+          function sync() {
+            btn.textContent = vid.paused ? "\u25B6" : "\u275A\u275A";
+            btn.setAttribute("aria-label", vid.paused ? "Play" : "Pause");
+            time.textContent = fmt(vid.currentTime) + " / " + fmt(vid.duration);
+            fill.style.width = vid.duration ? (vid.currentTime / vid.duration * 100) + "%" : "0";
+          }
+          function centered() {
+            var card = player.closest(".card");
+            return !card || card.getAttribute("aria-hidden") !== "true";
+          }
+          btn.addEventListener("click", function () {
+            if (!centered()) return;
+            if (vid.paused) vid.play(); else vid.pause();
+          });
+          bar.addEventListener("click", function (e) {
+            if (!centered() || !vid.duration) return;
+            var r = bar.getBoundingClientRect();
+            vid.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * vid.duration;
+          });
+          vid.addEventListener("play", sync);
+          vid.addEventListener("pause", sync);
+          vid.addEventListener("ended", sync);
+          vid.addEventListener("timeupdate", sync);
+          vid.addEventListener("loadedmetadata", sync);
+          sync();
         });
       })();
     </script>
