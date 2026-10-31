@@ -143,6 +143,26 @@
         background: radial-gradient(circle at 35% 30%, #ff9d8f, #c0392b 70%);
         box-shadow: 0 2px 3px rgba(0,0,0,0.35);
       }
+      .email-chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: max-content;
+        max-width: 100%;
+        margin: 22px auto 0;
+        padding: 10px 16px;
+        background: #fdf8ec;
+        color: var(--ink);
+        font-family: "Courier New", monospace;
+        font-size: 1rem;
+        text-decoration: none;
+        transform: rotate(1.2deg);
+        box-shadow: 0 4px 10px rgba(74, 58, 30, 0.18);
+        border: 1px solid rgba(74, 58, 30, 0.12);
+      }
+      .email-chip:hover { transform: rotate(0deg); }
+      .email-logo { flex: 0 0 auto; display: inline-flex; }
+      .email-logo svg { width: 26px; height: auto; display: block; }
       @media (prefers-color-scheme: dark) {
         .sticky-note { background: #8a7433; color: #fdf3cf; }
       }
@@ -408,6 +428,10 @@
         <aside class="sticky-note" aria-label="Note: your content deserves better editing">
           Your content deserves better editing.<br />Let’s make every second count!
         </aside>
+        <a class="email-chip" href="mailto:Kalidorxyz@gmail.com">
+          <span class="email-logo" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="52 42 88 66"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></span>
+          Kalidorxyz@gmail.com
+        </a>
       </header>
 
       <!-- ================= NAV ================= -->
