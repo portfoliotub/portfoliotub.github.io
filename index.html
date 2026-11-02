@@ -895,6 +895,23 @@
           vid.addEventListener("loadedmetadata", sync);
           sync();
         });
+
+        // Auto-pause on page scroll: when a playing video scrolls mostly out of
+        // view (less than half of its player visible), pause it in place.
+        // Position is kept, and it does NOT auto-resume when scrolled back.
+        if ("IntersectionObserver" in window) {
+          var scrollPause = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.intersectionRatio < 0.5) {
+                var v = en.target.querySelector("video");
+                if (v && !v.paused) v.pause();
+              }
+            });
+          }, { threshold: [0, 0.5, 1] });
+          document.querySelectorAll(".motion-player").forEach(function (p) {
+            scrollPause.observe(p);
+          });
+        }
       })();
     </script>
   </body>
