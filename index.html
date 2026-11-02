@@ -227,6 +227,7 @@
         overflow: hidden;
       }
       .stage.tall { height: 404px; }
+      #shorts .stage.tall { height: 450px; }
       .track {
         position: absolute; inset: 0;
       }
@@ -273,6 +274,7 @@
       @media (max-width: 560px) {
         .stage { height: 268px; }
         .stage.tall { height: 376px; }
+        #shorts .stage.tall { height: 450px; }
         .c-btn { width: 42px; height: 42px; }
       }
       .card .tape {
@@ -324,6 +326,7 @@
         aspect-ratio: 16 / 9;
         background: #000;
       }
+      #shorts .motion-video { aspect-ratio: 9 / 16; }
       .motion-player { border-radius: 2px; overflow: hidden; background: #000; }
       .motion-controls {
         display: flex;
@@ -681,32 +684,41 @@
         <div class="carousel" data-carousel tabindex="0" role="group" aria-roledescription="carousel" aria-label="Short Video samples">
           <div class="stage tall">
             <div class="track">
-          <article class="card">
+                    <article class="card">
             <span class="pin" aria-hidden="true"></span>
-            <div class="thumb tall">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.2v7.6L16.4 12 10 8.2Z"/></svg>
-              <span class="soon">Sample coming soon</span>
-              <span class="slot">Slot 01</span>
+            <div class="motion-player">
+              <video class="motion-video" src="short-1.mp4" poster="short-1.jpg" playsinline preload="metadata" disablepictureinpicture oncontextmenu="return false" aria-label="Short sample 1"></video>
+              <div class="motion-controls">
+                <button type="button" class="motion-play" aria-label="Play">▶</button>
+                <div class="motion-progress"><div class="motion-progress-fill"></div></div>
+                <span class="motion-time">0:00 / 0:00</span>
+              </div>
             </div>
-            <p class="caption">First short lands here</p>
+            <p class="caption">Short sample 1</p>
           </article>
-          <article class="card">
+                    <article class="card">
             <span class="tape" aria-hidden="true"></span>
-            <div class="thumb tall">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.2v7.6L16.4 12 10 8.2Z"/></svg>
-              <span class="soon">Sample coming soon</span>
-              <span class="slot">Slot 02</span>
+            <div class="motion-player">
+              <video class="motion-video" src="short-2.mp4" poster="short-2.jpg" playsinline preload="metadata" disablepictureinpicture oncontextmenu="return false" aria-label="Short sample 2"></video>
+              <div class="motion-controls">
+                <button type="button" class="motion-play" aria-label="Play">▶</button>
+                <div class="motion-progress"><div class="motion-progress-fill"></div></div>
+                <span class="motion-time">0:00 / 0:00</span>
+              </div>
             </div>
-            <p class="caption">Space saved for the next one</p>
+            <p class="caption">Short sample 2</p>
           </article>
-          <article class="card">
+                    <article class="card">
             <span class="pin" aria-hidden="true"></span>
-            <div class="thumb tall">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.2v7.6L16.4 12 10 8.2Z"/></svg>
-              <span class="soon">Sample coming soon</span>
-              <span class="slot">Slot 03</span>
+            <div class="motion-player">
+              <video class="motion-video" src="short-3.mp4" poster="short-3.jpg" playsinline preload="metadata" disablepictureinpicture oncontextmenu="return false" aria-label="Short sample 3"></video>
+              <div class="motion-controls">
+                <button type="button" class="motion-play" aria-label="Play">▶</button>
+                <div class="motion-progress"><div class="motion-progress-fill"></div></div>
+                <span class="motion-time">0:00 / 0:00</span>
+              </div>
             </div>
-            <p class="caption">More shorts on the way</p>
+            <p class="caption">Short sample 3</p>
           </article>
           <article class="card">
             <span class="tape" aria-hidden="true"></span>
